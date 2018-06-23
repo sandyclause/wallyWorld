@@ -4,6 +4,7 @@ import axios from "axios";
 import Qs from "qs";
 
 import Search from './components/search/Search';
+import Results from './components/results/Results';
 
 class App extends Component {
   constructor() {
@@ -11,6 +12,7 @@ class App extends Component {
 
     this.state = {
       searchInput: "",
+      searchResults: {},
     };
   }
 
@@ -73,6 +75,9 @@ class App extends Component {
       }
     }).then(res => {
       console.log(res.data);
+      this.setState({
+        searchResults: res.data
+      })
     });
   }
 
@@ -82,7 +87,11 @@ class App extends Component {
         yoyoyo
         <Search 
           search={this.searchInput}
-          searchSubmit={this.searchSubmit} />
+          searchSubmit={this.searchSubmit} 
+        />
+        <Results 
+          datas={this.state.searchResults.items}
+        />
       </div>
     );
   }
