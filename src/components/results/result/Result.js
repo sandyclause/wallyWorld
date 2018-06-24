@@ -1,7 +1,6 @@
 import React from 'react';
 import classes from './Result.css';
 import renderHTML from 'react-render-html';
-
 import { withRouter } from 'react-router-dom';
 
 class Result extends React.Component{
