@@ -16,31 +16,6 @@ class App extends Component {
     };
   }
 
-  componentDidMount() {
-    // axios({
-    //   url: "https://proxy.hackeryou.com",
-    //   method: "GET",
-    //   dataResponse: "json",
-    //   paramsSerializer: function(params) {
-    //     return Qs.stringify(params, { arrayFormat: "brackets" });
-    //   },
-    //   params: {
-    //     reqUrl:
-    //       "http://api.walmartlabs.com/v1/search",
-    //     params: {
-    //       apiKey: "y3xen4j3dtzbq4n7snepx8h3",
-    //       query: "ipod"
-    //     },
-    //     proxyHeaders: {
-    //       headers_params: "value"
-    //     },
-    //     xmlToJSON: false
-    //   }
-    // }).then(res => {
-    //   console.log(res.data);
-    // });
-  }
-
   searchInput = (e) => {
     this.setState({
       searchInput: e.currentTarget.value

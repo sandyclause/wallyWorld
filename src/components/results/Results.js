@@ -3,12 +3,22 @@ import Result from './result/Result';
 import classes from './Results.css';
 
 class Results extends React.Component{
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     
+    // this.state = {
+    //   searchData: this.props.datas
+    // }
+
   }
 
-
+  // componentWillReceiveProps(nextProps){
+  //   this.setState({
+  //     searchData: nextProps.datas
+  //   }, () => {
+  //     console.log(this.state.searchData)
+  //   })
+  // }
   
   render(){
     const datas = this.props.datas
@@ -25,6 +35,8 @@ class Results extends React.Component{
               ratingImg={data.customerRatingImage}
             />
           )) : null;
+
+
 
     return (
       <div className="wrapper">
