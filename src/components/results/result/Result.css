@@ -1,8 +1,9 @@
 .productCard{
   display: flex;
   flex-flow: column nowrap;
+  cursor: pointer;
 
-  flex: 0 1 180px;
+  flex: 0 1 240px;
   margin: 20px;
 }
 

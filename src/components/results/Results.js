@@ -5,23 +5,11 @@ import classes from './Results.css';
 class Results extends React.Component{
   constructor(props){
     super(props);
-    
-    // this.state = {
-    //   searchData: this.props.datas
-    // }
 
   }
 
-  // componentWillReceiveProps(nextProps){
-  //   this.setState({
-  //     searchData: nextProps.datas
-  //   }, () => {
-  //     console.log(this.state.searchData)
-  //   })
-  // }
-  
   render(){
-    const datas = this.props.location.state.data
+    const datas = this.props.data
     const result = datas !== undefined ? datas.map(data => (
             <Result 
               key={data.itemId}

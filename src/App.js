@@ -6,6 +6,7 @@ import Qs from "qs";
 import Search from './components/search/Search';
 import Results from './components/results/Results';
 
+
 class App extends Component {
   constructor() {
     super();
@@ -13,7 +14,36 @@ class App extends Component {
     this.state = {
       searchInput: "",
       searchResults: {},
+      deals: {}
     };
+  }
+
+  componentDidMount = () => {
+    axios({
+      url: "https://proxy.hackeryou.com",
+      method: "GET",
+      dataResponse: "json",
+      paramsSerializer: function (params) {
+        return Qs.stringify(params, { arrayFormat: "brackets" });
+      },
+      params: {
+        reqUrl:
+          "http://api.walmartlabs.com/v1/search",
+        params: {
+          apiKey: "y3xen4j3dtzbq4n7snepx8h3",
+          query: 'sale'
+        },
+        proxyHeaders: {
+          headers_params: "value"
+        },
+        xmlToJSON: false
+      }
+    }).then(res => {
+      console.log(res.data);
+      this.setState({
+        deals: res.data
+      })
+    });
   }
 
   searchInput = (e) => {
@@ -52,11 +82,10 @@ class App extends Component {
       this.setState({
         searchResults: res.data
       }, () => {
-                 const productDetails = this.state.searchInput;
+        const productDetails = this.state.searchInput;
 
-                 //                 push({ pathname: '/pathname', state: { message: "hello, im a passed message!" } });
-                 this.props.history.push({ pathname: `/searchResults/${productDetails}`, state: { data: res.data.items}});
-               })
+        this.props.history.push({ pathname: `/resultsPage/${productDetails}`, state: { data: res.data.items}});
+      })
     });
   }
 
@@ -68,9 +97,10 @@ class App extends Component {
           search={this.searchInput}
           searchSubmit={this.searchSubmit} 
         />
-        {/* <Results 
-          datas={this.state.searchResults.items}
-        /> */}
+        <h1>Deals of the Day</h1>
+        <Results
+          data={this.state.deals.items}
+        />
       </div>
     );
   }

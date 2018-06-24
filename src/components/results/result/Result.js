@@ -1,6 +1,7 @@
 import React from 'react';
 import classes from './Result.css';
 import { withRouter } from 'react-router-dom';
+import { reduceParagraph } from '../../../helpers';
 
 class Result extends React.Component{
 
@@ -25,7 +26,7 @@ class Result extends React.Component{
           <img src={this.props.img} alt={this.props.name} />
         </div>
         <div className="descriptionContainer">
-          <p className='description'>{this.props.name}</p>
+          <p className='description'>{reduceParagraph(this.props.name, 100)}</p>
         </div>
         <div className="ratingContainer">
           <img src={this.props.ratingImg} alt={this.props.rating}/>
