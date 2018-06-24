@@ -21,7 +21,7 @@ class Results extends React.Component{
   // }
   
   render(){
-    const datas = this.props.datas
+    const datas = this.props.location.state.data
     const result = datas !== undefined ? datas.map(data => (
             <Result 
               key={data.itemId}
@@ -41,6 +41,7 @@ class Results extends React.Component{
     return (
       <div className="wrapper">
         <div className="resultsContainer">
+          <p>result</p>
           {result}
         </div>
       </div>

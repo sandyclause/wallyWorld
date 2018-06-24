@@ -51,7 +51,12 @@ class App extends Component {
       console.log(res.data);
       this.setState({
         searchResults: res.data
-      })
+      }, () => {
+                 const productDetails = this.state.searchInput;
+
+                 //                 push({ pathname: '/pathname', state: { message: "hello, im a passed message!" } });
+                 this.props.history.push({ pathname: `/searchResults/${productDetails}`, state: { data: res.data.items}});
+               })
     });
   }
 
@@ -63,9 +68,9 @@ class App extends Component {
           search={this.searchInput}
           searchSubmit={this.searchSubmit} 
         />
-        <Results 
+        {/* <Results 
           datas={this.state.searchResults.items}
-        />
+        /> */}
       </div>
     );
   }

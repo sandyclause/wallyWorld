@@ -8,7 +8,7 @@ class Result extends React.Component{
     e.preventDefault();
     console.log(this.props.itemId);
     const productDetails = this.props.itemId;
-    this.props.history.push(`/productDetails/${productDetails}`)
+    this.props.history.push(`/products/${productDetails}`)
   }
 
   render(){
