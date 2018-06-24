@@ -20,6 +20,7 @@ class Results extends React.Component{
               desc={data.shortDescription}
               upc={data.upc}
               img={data.largeImage}
+              long={data.longDescription}
             />
           )) : null;
 

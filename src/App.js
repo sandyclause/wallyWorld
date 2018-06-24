@@ -42,7 +42,6 @@ class App extends Component {
   }
 
   searchInput = (e) => {
-    console.log(e.currentTarget.value);
     this.setState({
       searchInput: e.currentTarget.value
     });
