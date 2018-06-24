@@ -24,12 +24,14 @@ class Result extends React.Component{
         <div className="imgContainer">
           <img src={this.props.img} alt={this.props.name} />
         </div>
+        <div className="descriptionContainer">
+          <p className='description'>{this.props.name}</p>
+        </div>
         <div className="ratingContainer">
           <img src={this.props.ratingImg} alt={this.props.rating}/>
           <p>{this.props.ratingNum}</p>
         </div>
-        <div className="descriptionContainer">
-          <p className='description'>{this.props.name}</p>
+        <div className="priceContainer">
           {salePrice}
           {msrp}
         </div>

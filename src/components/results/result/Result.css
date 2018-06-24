@@ -2,12 +2,15 @@
   display: flex;
   flex-flow: column nowrap;
 
-  flex: 0 1 150px;
+  flex: 0 1 180px;
   margin: 20px;
 }
 
 .imgContainer {
-  height: 200px;
+  height: 260px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
   justify-content: center;
 }
 
@@ -20,6 +23,11 @@
 
 }
 
+.descriptionContainer p{
+  padding: 0;
+  margin: 0;
+}
+
 .descriptionContainer .description{
   margin: 0;
   padding: 0;
@@ -28,6 +36,15 @@
 
 .descriptionContainer span{
   font-weight: bold;
+}
+
+.priceContainer{
+  text-align: left;
+}
+
+.priceContainer p{
+  margin: 10px 0;
+  padding: 0;
 }
 
 .salePrice{
@@ -45,16 +62,17 @@
 }
 
 .ratingContainer{
-  /* display: flex; */
+  display: flex;
   flex-flow: row nowrap;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .ratingContainer img{
-  /* flex: 1 1 100px; */
-  width: 100px;
-  height: auto;
+  max-width: 100px;
 }
 
 .ratingContainer p{
-  flex: 2 1 auto;
+  display: inline-block;
+  font-size: 1.2rem;
 }
