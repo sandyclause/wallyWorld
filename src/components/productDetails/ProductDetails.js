@@ -3,6 +3,8 @@ import axios from "axios";
 import Qs from "qs";
 import renderHTML from "react-render-html";
 
+import { reduceParagraph } from '../../helpers';
+
 class ProductDetails extends React.Component {
   constructor(){
     super();
@@ -45,13 +47,17 @@ class ProductDetails extends React.Component {
     const decode = require('decode-html');
     const longDesc = this.state.searchResults.longDescription !== undefined ? renderHTML(decode(this.state.searchResults.longDescription)) : null;
 
+    const shortDesc = this.state.searchResults.shortDescription !== undefined ?
+    reduceParagraph(this.state.searchResults.shortDescription, 400) : null;
+
+
     return <React.Fragment>
         <p>product details</p>
         <img src={this.state.searchResults.largeImage} alt={this.state.searchResults.name} />
         <p>{this.props.match.params.itemId}</p>
         <p>{this.state.searchResults.name}</p>
         <p>{this.state.searchResults.salePrice}</p>
-        <p>{this.state.searchResults.shortDescription}</p>
+        <p>{shortDesc}</p>
         {longDesc}
       </React.Fragment>;
   }

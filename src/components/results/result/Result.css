@@ -1,10 +1,14 @@
 .productCard{
   display: flex;
   flex-flow: column nowrap;
+
+  flex: 0 1 150px;
+  margin: 20px;
 }
 
 .imgContainer {
-  max-width: 300px;
+  height: 200px;
+  justify-content: center;
 }
 
 .descriptionContainer{
@@ -13,14 +17,44 @@
   flex-flow: column nowrap;
   align-items: flex-start;
   text-align: left;
+
 }
 
-.descriptionContainer p{
+.descriptionContainer .description{
   margin: 0;
   padding: 0;
+  font-size: 2rem;
 }
 
 .descriptionContainer span{
   font-weight: bold;
 }
 
+.salePrice{
+  font-size: 1.6rem;
+}
+
+.msrpPrice {
+  text-decoration: line-through;
+  font-size: 1.6rem;
+}
+
+.onSale{
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+.ratingContainer{
+  /* display: flex; */
+  flex-flow: row nowrap;
+}
+
+.ratingContainer img{
+  /* flex: 1 1 100px; */
+  width: 100px;
+  height: auto;
+}
+
+.ratingContainer p{
+  flex: 2 1 auto;
+}

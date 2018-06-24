@@ -1,6 +1,5 @@
 import React from 'react';
 import classes from './Result.css';
-import renderHTML from 'react-render-html';
 import { withRouter } from 'react-router-dom';
 
 class Result extends React.Component{
@@ -13,22 +12,28 @@ class Result extends React.Component{
   }
 
   render(){
-    const decode = require('decode-html');
-
-    return(
-      <div className='productCard' onClick={this.goToDetails}>
+    const msrp = this.props.msrp ? <p className='msrpPrice'><span>$</span>{this.props.msrp}</p> : null;
+    const salePrice = this.props.msrp ? <p className='salePrice onSale'>
+      <span>$</span>
+      {this.props.salePrice}
+    </p> : <p className='salePrice'>
+        <span>$</span>
+        {this.props.salePrice}
+      </p>
+    return <div className="productCard" onClick={this.goToDetails}>
         <div className="imgContainer">
-          <img src={this.props.img} alt={this.props.name}/>
+          <img src={this.props.img} alt={this.props.name} />
         </div>
-        <div className='descriptionContainer'>
-          <p>{this.props.name}</p>
-          <p><span>$</span>{this.props.salePrice}</p>
-          <p><span>About this item:</span> {this.props.desc}</p>
-          <p><span>UPC:</span> {this.props.upc}</p>
-          {renderHTML(decode(this.props.long))}
+        <div className="ratingContainer">
+          <img src={this.props.ratingImg} alt={this.props.rating}/>
+          <p>{this.props.ratingNum}</p>
         </div>
-      </div>
-    )
+        <div className="descriptionContainer">
+          <p className='description'>{this.props.name}</p>
+          {salePrice}
+          {msrp}
+        </div>
+      </div>;
   }
 }
 

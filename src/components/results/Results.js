@@ -1,5 +1,6 @@
 import React from 'react';
 import Result from './result/Result';
+import classes from './Results.css';
 
 class Results extends React.Component{
   constructor(){
@@ -17,16 +18,19 @@ class Results extends React.Component{
               itemId={data.itemId}
               name={data.name}
               salePrice={data.salePrice}
-              desc={data.shortDescription}
-              upc={data.upc}
-              img={data.largeImage}
+              msrp={data.msrp}
               long={data.longDescription}
+              img={data.largeImage}
+              ratingNum={data.numReviews}
+              ratingImg={data.customerRatingImage}
             />
           )) : null;
 
     return (
-      <div>
-        {result}
+      <div className="wrapper">
+        <div className="resultsContainer">
+          {result}
+        </div>
       </div>
       
     )
