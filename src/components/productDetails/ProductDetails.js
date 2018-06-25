@@ -129,10 +129,10 @@ class ProductDetails extends React.Component {
         {this.state.searchResults.msrp}
       </p> : null;
 
-    const variationsArray = this.state.variationsArray !== undefined ? this.state.variationsArray.map(variation => {
+    const variationsArray = this.state.variationsArray !== undefined ? this.state.variationsArray.map( (variation, index) => {
       return (
         <Result
-          key={variation.itemId}
+          key={variation.itemId + variation.upc + index}
           itemId={variation.itemId}
           name={variation.name}
           salePrice={variation.salePrice}

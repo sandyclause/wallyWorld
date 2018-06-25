@@ -10,6 +10,7 @@ class Result extends React.Component{
     console.log(this.props.itemId);
     const productDetails = this.props.itemId;
     this.props.history.push(`/products/${productDetails}`)
+    window.scrollTo(0, 0);
   }
 
   render(){
