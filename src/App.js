@@ -103,7 +103,7 @@ class App extends Component {
           search={this.searchInput}
           searchSubmit={this.searchSubmit} 
         />
-        <img src="../images/pickUpImg.jpg" alt="pick up images" className='pickUpImage'/>
+        <img src="./images/pickUpImg.jpg" alt="pick up images" className='pickUpImage'/>
         <div className="carousel">
           <Carousel
             autoPlay={true}
@@ -112,13 +112,13 @@ class App extends Component {
             showStatus={false}
             showThumbs={false}>
             <div>
-              <img src="../images/carousel01.jpg" alt="delivery or free pickup"/>
+              <img src="./images/carousel01.jpg" alt="delivery or free pickup"/>
             </div>
             <div>
-              <img src="../images/carousel02.jpg" alt="play the day away in the pool" />
+              <img src="./images/carousel02.jpg" alt="play the day away in the pool" />
             </div>
             <div>
-              <img src="../images/carousel03.jpg" alt="get moving this summer" />
+              <img src="./images/carousel03.jpg" alt="get moving this summer" />
             </div>
           </Carousel>
         </div>

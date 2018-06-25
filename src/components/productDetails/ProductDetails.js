@@ -18,7 +18,8 @@ class ProductDetails extends React.Component {
       searchResults: {
         imageEntities: []
       },
-      variationsArray: []
+      variationsArray: [],
+      imgEntities: []
     }
   }
 
@@ -61,6 +62,8 @@ class ProductDetails extends React.Component {
 
       this.setState({
         searchResults: res.data
+      }, () => {
+        this.getImgEntities(res.data.imageEntities);
       });
     });
   }
@@ -68,6 +71,16 @@ class ProductDetails extends React.Component {
   multiCall = (variArray) => {
     variArray.map( vari => {
       this.getVariations(vari);
+    })
+  }
+
+  getImgEntities = (array) => {
+    const newImgArray = [...this.state.imgEntities];
+    for ( let i=0; i < array.length || i < 4; i++){
+      newImgArray.push(array[i].largeImage);
+    }
+    this.setState({
+      imgEntities: newImgArray
     })
   }
 
@@ -143,7 +156,8 @@ class ProductDetails extends React.Component {
       }) : <p>loading</p>;
 
 
-    const imageEntities = this.state.searchResults.imageEntities[0] ? this.state.searchResults.imageEntities.reverse().map( (image, index) => {
+    const imageEntities = this.state.imgEntities ? 
+      this.state.imgEntities.reverse().map( (image, index) => {
         return (
         <div key={index}>
           <img src={image.largeImage} />
@@ -157,23 +171,23 @@ class ProductDetails extends React.Component {
     return <React.Fragment>
         <div className="productSectionContainer">
           <div className="wrapper">
-            <div className="productImgContainer">
-              {/* <img src={largeImg} alt={name} /> */}
-              <Carousel>{imageEntities}</Carousel>
-
-              
-            </div>
-            <div className="productInfoContainer">
-              <p className="productTitle">{name}</p>
-              <div className="reviewsContainer">
-                <img src={ratingImg} alt={name} />
-                <p>{ratingNum} reviews</p>
+            <div className="productImgDescriptionContainer">
+              <div className="productImgContainer">
+                {/* <img src={largeImg} alt={name} /> */}
+                <Carousel>{imageEntities}</Carousel>
               </div>
-              <div className="priceContainer">
-                {salePrice}
-                {msrp}
+              <div className="productInfoContainer">
+                <p className="productTitle">{name}</p>
+                <div className="reviewsContainer">
+                  <img src={ratingImg} alt={name} />
+                  <p>{ratingNum} reviews</p>
+                </div>
+                <div className="priceContainer">
+                  {salePrice}
+                  {msrp}
+                </div>
+                <p>Walmart #{itemId}</p>
               </div>
-              <p>Walmart #{itemId}</p>
             </div>
             <div className="aboutDetailsContainer">
               <p className="aboutDetailsTitle">About This Item</p>
