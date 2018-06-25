@@ -6,13 +6,17 @@ import renderHTML from "react-render-html";
 import { reduceParagraph } from '../../helpers';
 import classes from './ProductDetails.css';
 import Result from '../results/result/Result';
+import { Carousel } from "react-responsive-carousel";
+import styles from "react-responsive-carousel/lib/styles/carousel.min.css";
 
 class ProductDetails extends React.Component {
   constructor(){
     super();
 
     this.state = {
-      searchResults: {},
+      searchResults: {
+        imageEntities: []
+      },
       variationsArray: []
     }
   }
@@ -38,10 +42,10 @@ class ProductDetails extends React.Component {
         xmlToJSON: false
       }
     }).then(res => {
-      console.log(res.data);
+      // console.log(res.data);
 
       //calls all the variants
-      // this.multiCall(res.data.variants);
+      this.multiCall(res.data.variants);
 
       this.setState({ 
         searchResults: res.data 
@@ -52,7 +56,6 @@ class ProductDetails extends React.Component {
   multiCall = (variArray) => {
     variArray.map( vari => {
       this.getVariations(vari);
-      console.log(vari);
     })
   }
 
@@ -114,27 +117,42 @@ class ProductDetails extends React.Component {
         {this.state.searchResults.msrp}
       </p> : null;
 
-    const variationsArray = this.state.variationsArray ? this.state.variationsArray.map(variation => {
-      <p>yo</p>
-        // <Result
-        //   key={variation.itemId}
-        //   itemId={variation.itemId}
-        //   name={variation.name}
-        //   salePrice={variation.salePrice}
-        //   msrp={variation.msrp}
-        //   img={variation.largeImage}
-        // />
+    const variationsArray = this.state.variationsArray !== undefined ? this.state.variationsArray.map(variation => {
+      return (
+        <Result
+          key={variation.itemId}
+          itemId={variation.itemId}
+          name={variation.name}
+          salePrice={variation.salePrice}
+          msrp={variation.msrp}
+          img={variation.largeImage}
+        />
+      )
       }) : <p>loading</p>;
-    console.log(variationsArray);
+
+
+    const imageEntities = this.state.searchResults.imageEntities[0] ? this.state.searchResults.imageEntities.map( (image, index) => {
+        return (
+        <div key={index}>
+          <img src={image.largeImage} />
+        </div>
+        )
+    }) : null;
+
+ 
+
 
     return <React.Fragment>
         <div className="productSectionContainer">
           <div className="wrapper">
             <div className="productImgContainer">
-              <img src={largeImg} alt={name} />
+              {/* <img src={largeImg} alt={name} /> */}
+              <Carousel>{imageEntities}</Carousel>
+
+              
             </div>
             <div className="productInfoContainer">
-              <p className='productTitle'>{name}</p>
+              <p className="productTitle">{name}</p>
               <div className="reviewsContainer">
                 <img src={ratingImg} alt={name} />
                 <p>{ratingNum} reviews</p>
@@ -146,14 +164,10 @@ class ProductDetails extends React.Component {
               <p>Walmart #{itemId}</p>
             </div>
             <div className="aboutDetailsContainer">
-              <p className='aboutDetailsTitle'>About This Item</p>
+              <p className="aboutDetailsTitle">About This Item</p>
               <div className="aboutDetails">
-                <div className="shortDesc">
-                  {shortDesc}
-                </div>
-                <div className="longDesc">
-                  {longDesc}
-                </div>
+                <div className="shortDesc">{shortDesc}</div>
+                <div className="longDesc">{longDesc}</div>
               </div>
             </div>
             <div>
