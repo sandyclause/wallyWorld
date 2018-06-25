@@ -22,3 +22,7 @@ body{
 .App {
   text-align: center;
 }
+
+.carousel {
+  margin: 30px 0;
+}

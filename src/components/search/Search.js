@@ -12,7 +12,7 @@ class Search extends React.Component{
   render(){
     return <React.Fragment>
         <form action="" onSubmit={this.props.searchSubmit}>
-        <input type="text" className='searchInput' placeholder='Search' onChange={this.props.search}/>
+          <input type="text" className='searchInput' placeholder='Search' onChange={this.props.search}/>
           <button className='searchButton'>
           <FontAwesomeIcon icon='search' />
           </button>

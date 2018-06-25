@@ -103,25 +103,25 @@ class App extends Component {
           search={this.searchInput}
           searchSubmit={this.searchSubmit} 
         />
-        <Carousel
-          autoPlay={true}
-          infiniteLoop={true}
-          interval={3000}
-          showStatus={false}
-          showThumbs={false}>
-          <div>
-            <img src="../images/carousel01.jpg" alt=""/>
-          </div>
-          <div>
-            <img src="../images/carousel02.jpg" alt="" />
-          </div>
-          <div>
-            <img src="../images/carousel03.jpg" alt="" />
-          </div>
-          <div>
-            <img src="../images/carousel04.jpg" alt="" />
-          </div>
-        </Carousel>
+        <img src="../images/pickUpImg.jpg" alt="pick up images" className='pickUpImage'/>
+        <div className="carousel">
+          <Carousel
+            autoPlay={true}
+            infiniteLoop={true}
+            interval={3000}
+            showStatus={false}
+            showThumbs={false}>
+            <div>
+              <img src="../images/carousel01.jpg" alt="delivery or free pickup"/>
+            </div>
+            <div>
+              <img src="../images/carousel02.jpg" alt="play the day away in the pool" />
+            </div>
+            <div>
+              <img src="../images/carousel03.jpg" alt="get moving this summer" />
+            </div>
+          </Carousel>
+        </div>
         <h1>Deals of the Day</h1>
         <Results
           data={this.state.deals.items}

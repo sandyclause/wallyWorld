@@ -1,13 +1,21 @@
+input {
+  width: 100%;
+}
+
 .searchInput {
   font-size: 2rem;
   height: 35px;
+  max-width: 400px;
   padding: 0 5px;
   margin: 0;
 }
 
 form {
   background: rgba(4,30,66,.98);
-  padding: 2px 0;
+  padding: 2px 20px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
 }
 
 input, button, submit {

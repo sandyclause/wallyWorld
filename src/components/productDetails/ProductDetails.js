@@ -128,7 +128,6 @@ class ProductDetails extends React.Component {
     console.log(variationsArray);
 
     return <React.Fragment>
-        <p>product details</p>
         <div className="productSectionContainer">
           <div className="wrapper">
             <div className="productImgContainer">
@@ -149,8 +148,12 @@ class ProductDetails extends React.Component {
             <div className="aboutDetailsContainer">
               <p className='aboutDetailsTitle'>About This Item</p>
               <div className="aboutDetails">
-                <p>{shortDesc}</p>
-                {longDesc}
+                <div className="shortDesc">
+                  {shortDesc}
+                </div>
+                <div className="longDesc">
+                  {longDesc}
+                </div>
               </div>
             </div>
             <div>
