@@ -5,6 +5,11 @@ import Qs from "qs";
 
 import Search from './components/search/Search';
 import Results from './components/results/Results';
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+
+library.add(faSearch);
 
 
 class App extends Component {
@@ -92,7 +97,6 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        yoyoyo
         <Search 
           search={this.searchInput}
           searchSubmit={this.searchSubmit} 

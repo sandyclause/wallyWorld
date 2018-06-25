@@ -1,0 +1,55 @@
+.productSectionContainer .wrapper{
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.productImgContainer {
+  flex: 1 1 300px;
+}
+
+.productInfoContainer{
+  flex: 1 1 300px;
+  padding: 0 30px;
+}
+
+.reviewsContainer {
+  display: flex;
+  flex-flow: row nowrap;
+
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.reviewsContainer img {
+  max-width: 80px;
+}
+
+.reviewsContainer p{
+  font-size: 2rem;
+  margin: 0 10px;
+}
+
+.productTitle {
+  font-size: 3rem;
+}
+
+
+/* about details */
+.aboutDetailsContainer{
+  display: flex;
+  flex-flow: column nowrap;
+
+}
+
+.aboutDetailsTitle {
+  font-size: 2.1rem;
+  font-weight: 400;
+}
+
+.aboutDetails {
+  display: flex;
+  flex-flow: column nowrap;
+
+  font-size: 1.6rem;
+  line-height: 2.2rem;
+}

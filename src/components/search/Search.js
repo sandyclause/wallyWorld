@@ -1,4 +1,6 @@
 import React from 'react';
+import classes from './Search.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class Search extends React.Component{
   constructor(){
@@ -10,8 +12,10 @@ class Search extends React.Component{
   render(){
     return <React.Fragment>
         <form action="" onSubmit={this.props.searchSubmit}>
-        <input type="text" onChange={this.props.search}/>
-          <button>Search</button>
+        <input type="text" className='searchInput' placeholder='Search' onChange={this.props.search}/>
+          <button className='searchButton'>
+          <FontAwesomeIcon icon='search' />
+          </button>
         </form>
       </React.Fragment>;
   }

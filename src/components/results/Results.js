@@ -24,12 +24,9 @@ class Results extends React.Component{
             />
           )) : null;
 
-
-
     return (
       <div className="wrapper">
         <div className="resultsContainer">
-          <p>result</p>
           {result}
         </div>
       </div>

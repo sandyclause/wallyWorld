@@ -1,0 +1,25 @@
+.searchInput {
+  font-size: 2rem;
+  height: 35px;
+  padding: 0 5px;
+  margin: 0;
+}
+
+form {
+  background: rgba(4,30,66,.98);
+  padding: 2px 0;
+}
+
+input, button, submit {
+  border: none;
+}
+
+.searchButton {
+  height: 35px;
+  background: #ffffff;
+}
+
+.fa-search{
+  font-size: 2rem;
+  
+}
