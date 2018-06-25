@@ -75,10 +75,15 @@ class ProductDetails extends React.Component {
   }
 
   getImgEntities = (array, num) => {
-    const newImgArray = [...this.state.imgEntities];
+    let newImgArray = [...this.state.imgEntities];
+    let setter = [];
+
     for ( let i=0; i < array.length && i < num; i++){
-      newImgArray.push(array[i].largeImage);
+      setter.push(array[i].largeImage);
     }
+    console.log(newImgArray);
+    newImgArray = setter;
+    console.log(setter);
     this.setState({
       imgEntities: newImgArray
     })
