@@ -63,3 +63,10 @@
 .longDesc {
   margin: 20px 0;
 }
+
+.variationArrayContainer {
+  display: flex;
+  flex-flow: row wrap;
+
+  justify-content: space-around;
+}

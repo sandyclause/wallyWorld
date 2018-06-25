@@ -10,10 +10,11 @@ import { Carousel } from "react-responsive-carousel";
 import styles from "react-responsive-carousel/lib/styles/carousel.min.css";
 
 class ProductDetails extends React.Component {
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
 
     this.state = {
+      itemId: this.props.match.params.itemId,
       searchResults: {
         imageEntities: []
       },
@@ -22,20 +23,29 @@ class ProductDetails extends React.Component {
   }
 
   componentDidMount(){
+   this.callProduct(this.state.itemId);
+  };
+
+  componentWillReceiveProps(newProps){
+    console.log(newProps.match.params.itemId);
+    this.callProduct(newProps.match.params.itemId);
+  }
+
+  callProduct = (itemId) => {
     axios({
       url: "https://proxy.hackeryou.com",
       method: "GET",
       dataResponse: "json",
-      paramsSerializer: function(params) {
+      paramsSerializer: function (params) {
         return Qs.stringify(params, { arrayFormat: "brackets" });
       },
       params: {
         reqUrl: `http://api.walmartlabs.com/v1/items/${
-          this.props.match.params.itemId
-        }`,
+          itemId
+          }`,
         params: {
           apiKey: "y3xen4j3dtzbq4n7snepx8h3"
-         },
+        },
         proxyHeaders: {
           headers_params: "value"
         },
@@ -45,13 +55,15 @@ class ProductDetails extends React.Component {
       // console.log(res.data);
 
       //calls all the variants
-      this.multiCall(res.data.variants);
+      if (res.data.variants !== undefined) {
+        this.multiCall(res.data.variants);
+      }
 
-      this.setState({ 
-        searchResults: res.data 
+      this.setState({
+        searchResults: res.data
       });
     });
-  };
+  }
 
   multiCall = (variArray) => {
     variArray.map( vari => {
@@ -131,7 +143,7 @@ class ProductDetails extends React.Component {
       }) : <p>loading</p>;
 
 
-    const imageEntities = this.state.searchResults.imageEntities[0] ? this.state.searchResults.imageEntities.map( (image, index) => {
+    const imageEntities = this.state.searchResults.imageEntities[0] ? this.state.searchResults.imageEntities.reverse().map( (image, index) => {
         return (
         <div key={index}>
           <img src={image.largeImage} />
@@ -170,8 +182,7 @@ class ProductDetails extends React.Component {
                 <div className="longDesc">{longDesc}</div>
               </div>
             </div>
-            <div>
-              <p>Customers also considered: COMING SOON</p>
+            <div className='variationArrayContainer'>
               {variationsArray}
             </div>
           </div>
