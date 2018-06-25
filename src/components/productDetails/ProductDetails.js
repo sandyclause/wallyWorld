@@ -63,7 +63,7 @@ class ProductDetails extends React.Component {
       this.setState({
         searchResults: res.data
       }, () => {
-        this.getImgEntities(res.data.imageEntities);
+        this.getImgEntities(res.data.imageEntities, 5);
       });
     });
   }
@@ -74,9 +74,9 @@ class ProductDetails extends React.Component {
     })
   }
 
-  getImgEntities = (array) => {
+  getImgEntities = (array, num) => {
     const newImgArray = [...this.state.imgEntities];
-    for ( let i=0; i < array.length || i < 4; i++){
+    for ( let i=0; i < array.length && i < num; i++){
       newImgArray.push(array[i].largeImage);
     }
     this.setState({
@@ -155,13 +155,14 @@ class ProductDetails extends React.Component {
       )
       }) : <p>loading</p>;
 
-
-    const imageEntities = this.state.imgEntities ? 
-      this.state.imgEntities.reverse().map( (image, index) => {
+    const imagesArray = [...this.state.imgEntities];
+    const imageEntities = this.state.imgEntities !== [] ? 
+      imagesArray.reverse().map( (image, index) => {
         return (
-        <div key={index}>
-          <img src={image.largeImage} />
-        </div>
+
+          <div key={index}>
+            <img src={image} />
+          </div>
         )
     }) : null;
 
