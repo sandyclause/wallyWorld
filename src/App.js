@@ -8,6 +8,8 @@ import Results from './components/results/Results';
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { Carousel } from 'react-responsive-carousel';
+import styles from "react-responsive-carousel/lib/styles/carousel.min.css";
 
 library.add(faSearch);
 
@@ -101,6 +103,25 @@ class App extends Component {
           search={this.searchInput}
           searchSubmit={this.searchSubmit} 
         />
+        <Carousel
+          autoPlay={true}
+          infiniteLoop={true}
+          interval={3000}
+          showStatus={false}
+          showThumbs={false}>
+          <div>
+            <img src="../images/carousel01.jpg" alt=""/>
+          </div>
+          <div>
+            <img src="../images/carousel02.jpg" alt="" />
+          </div>
+          <div>
+            <img src="../images/carousel03.jpg" alt="" />
+          </div>
+          <div>
+            <img src="../images/carousel04.jpg" alt="" />
+          </div>
+        </Carousel>
         <h1>Deals of the Day</h1>
         <Results
           data={this.state.deals.items}
