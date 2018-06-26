@@ -53,26 +53,44 @@ class ProductDetails extends React.Component {
         xmlToJSON: false
       }
     }).then(res => {
-      // console.log(res.data);
-
-      //calls all the variants
-      if (res.data.variants !== undefined) {
-        this.multiCall(res.data.variants);
-      }
 
       this.setState({
         searchResults: res.data
       }, () => {
         this.getImgEntities(res.data.imageEntities, 5);
+        if (res.data.variants !== undefined) {
+          console.log(res.data.variants);
+          this.multiCall(res.data.variants, 4);
+        }
       });
     });
   }
 
-  multiCall = (variArray) => {
-    variArray.map( vari => {
-      this.getVariations(vari);
+  multiCall = (variArray, num) => {
+    let newArray = [];
+
+    for ( let i=0; i < variArray.length && i < num; i++){
+      newArray.push(this.getVariations(variArray[i]))
+    }
+    Promise.all(newArray)
+      .then(data => {
+        console.log(data)
+        this.setState({
+          variationsArray: data
+        })
     })
   }
+
+  // multiCall = (variArray) => {
+  //   const arrayOfVariationPromises = variArray.map(variationObject, index => this.getVariations(variationObject))
+  //   Promise.all(arrayOfVariationPromises)
+  //     .then(data => {
+  //       console.log(data)
+  //       this.setState({
+  //         variationsArray: data
+  //       })
+  //     })
+  // }
 
   getImgEntities = (array, num) => {
     let newImgArray = [...this.state.imgEntities];
@@ -81,16 +99,14 @@ class ProductDetails extends React.Component {
     for ( let i=0; i < array.length && i < num; i++){
       setter.push(array[i].largeImage);
     }
-    console.log(newImgArray);
     newImgArray = setter;
-    console.log(setter);
     this.setState({
       imgEntities: newImgArray
     })
   }
 
   getVariations = (params) => {
-    axios({
+    return axios({
       url: "https://proxy.hackeryou.com",
       method: "GET",
       dataResponse: "json",
@@ -110,13 +126,7 @@ class ProductDetails extends React.Component {
         xmlToJSON: false
       }
     }).then(res => {
-
-      const variationsArrayClone = [...this.state.variationsArray];
-      variationsArrayClone.push(res.data);
-      this.setState({
-        variationsArray: variationsArrayClone
-      })
-
+      return res.data;
     });
   }
 
