@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { Carousel } from 'react-responsive-carousel';
 import styles from "react-responsive-carousel/lib/styles/carousel.min.css";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 library.add(faSearch);
 
@@ -85,10 +86,12 @@ class App extends Component {
         xmlToJSON: false
       }
     }).then(res => {
-      console.log(res.data);
+      // console.log(res.data);
+      console.log('state set');
       this.setState({
         searchResults: res.data
       }, () => {
+        console.log('pushed');
         const productDetails = this.state.searchInput;
 
         this.props.history.push({ pathname: `/resultsPage/${productDetails}`, state: { data: res.data.items}});
@@ -97,22 +100,19 @@ class App extends Component {
   }
 
   render() {
-    return (
-      <div className="App">
-        <Search 
-          search={this.searchInput}
-          searchSubmit={this.searchSubmit} 
-        />
-        <img src="./images/pickUpImg.jpg" alt="pick up images" className='pickUpImage'/>
+    return <div className="App">
+        <BrowserRouter>
+          <Route path="/" render={(props) => <Search
+            search={this.searchInput}
+            searchSubmit={this.searchSubmit} />} />
+        </BrowserRouter>
+        {/* <Search search={this.searchInput} searchSubmit={this.searchSubmit} /> */}
+
+        <img src="./images/pickUpImg.jpg" alt="pick up images" className="pickUpImage" />
         <div className="carousel">
-          <Carousel
-            autoPlay={true}
-            infiniteLoop={true}
-            interval={3000}
-            showStatus={false}
-            showThumbs={false}>
+          <Carousel autoPlay={true} infiniteLoop={true} interval={3000} showStatus={false} showThumbs={false}>
             <div>
-              <img src="./images/carousel01.jpg" alt="delivery or free pickup"/>
+              <img src="./images/carousel01.jpg" alt="delivery or free pickup" />
             </div>
             <div>
               <img src="./images/carousel02.jpg" alt="play the day away in the pool" />
@@ -123,11 +123,9 @@ class App extends Component {
           </Carousel>
         </div>
         <h1>Deals of the Day</h1>
-        <Results
-          data={this.state.deals.items}
-        />
-      </div>
-    );
+
+        <Results data={this.state.deals.items} />
+      </div>;
   }
 }
 
