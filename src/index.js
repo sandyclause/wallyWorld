@@ -1,7 +1,6 @@
-import React from 'react';
-import { render } from "react-dom";
-import './index.css';
-import Router from './components/Router';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
 
-render(<Router basename={'/wallyworld'} />, document.getElementById('root'));
-
+ReactDOM.render(<App />, document.getElementById("root"));

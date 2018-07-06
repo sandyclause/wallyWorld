@@ -5,12 +5,15 @@ import Qs from "qs";
 
 import Search from './components/search/Search';
 import Results from './components/results/Results';
+import ProductDetails from "./components/productDetails/ProductDetails";
+import ResultsPage from "./containers/resultsPage/ResultsPage";
+import Home from './components/homePage/Home';
+import history from './history';
+
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import { Carousel } from 'react-responsive-carousel';
-import styles from "react-responsive-carousel/lib/styles/carousel.min.css";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { Router, Route, Switch } from "react-router-dom";
 
 library.add(faSearch);
 
@@ -22,6 +25,7 @@ class App extends Component {
     this.state = {
       searchInput: "",
       searchResults: {},
+      searchResultsItems: {},
       deals: {}
     };
   }
@@ -89,43 +93,30 @@ class App extends Component {
       // console.log(res.data);
       console.log('state set');
       this.setState({
-        searchResults: res.data
+        searchResults: res.data,
+        searchResultsItems: res.data.items
       }, () => {
         console.log('pushed');
         const productDetails = this.state.searchInput;
 
-        this.props.history.push({ pathname: `/resultsPage/${productDetails}`, state: { data: res.data.items}});
+        // this.props.history.push({ pathname: `/resultsPage/${productDetails}`, state: { data: res.data.items}});
+        history.push(`/resultsPage/${productDetails}`);
       })
     });
   }
 
   render() {
-    return <div className="App">
-        <BrowserRouter>
-          <Route path="/" render={(props) => <Search
-            search={this.searchInput}
-            searchSubmit={this.searchSubmit} />} />
-        </BrowserRouter>
-        {/* <Search search={this.searchInput} searchSubmit={this.searchSubmit} /> */}
+    return <Router history={history}>
+        <div className="App">
+          {/* <Route path='/' render={props => <Search {...this.props} {...props} search={this.searchInput} searchSubmit={this.searchSubmit} />} /> */}
+          <Search search={this.searchInput} searchSubmit={this.searchSubmit} />
+        
+          <Route exact path="/" render={props => <Home {...this.props} {...props} data={this.state.deals.items} />} />
 
-        <img src="./images/pickUpImg.jpg" alt="pick up images" className="pickUpImage" />
-        <div className="carousel">
-          <Carousel autoPlay={true} infiniteLoop={true} interval={3000} showStatus={false} showThumbs={false}>
-            <div>
-              <img src="./images/carousel01.jpg" alt="delivery or free pickup" />
-            </div>
-            <div>
-              <img src="./images/carousel02.jpg" alt="play the day away in the pool" />
-            </div>
-            <div>
-              <img src="./images/carousel03.jpg" alt="get moving this summer" />
-            </div>
-          </Carousel>
+          <Route path="/resultsPage/:search" render={props => <ResultsPage {...this.props} {...props} data={this.state.searchResultsItems} />} />
+          <Route path="/products/:itemId" component={ProductDetails} />
         </div>
-        <h1>Deals of the Day</h1>
-
-        <Results data={this.state.deals.items} />
-      </div>;
+      </Router>;
   }
 }
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import classes from './Search.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { withRouter } from 'react-router-dom';
 
 class Search extends React.Component{
   constructor(){
@@ -21,4 +22,4 @@ class Search extends React.Component{
   }
 }
 
-export default Search;
+export default withRouter(Search);

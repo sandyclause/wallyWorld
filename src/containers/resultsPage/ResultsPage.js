@@ -8,14 +8,13 @@ class ResultsPage extends React.Component{
   }
 
   render(){
-    console.log(this.props.location.state);
     return(
       <React.Fragment>
         <p>results page</p>
         {/* <Search /> */}
         
         <Results
-          data={this.props.location.state.data}
+          data={this.props.data}
         />
       </React.Fragment>
     )
