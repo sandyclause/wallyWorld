@@ -63,6 +63,7 @@
 
 .shortDesc {
   margin: 20px 0;
+  cursor: pointer;
 }
 
 .longDesc {

@@ -26,7 +26,7 @@ class Home extends React.Component{
             </div>
           </Carousel>
         </div>
-        <h1>Deals of the Day</h1>
+        <h1>Trending Deals</h1>
 
         <Results data={this.props.data} />
       </React.Fragment>

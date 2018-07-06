@@ -3,9 +3,11 @@ import axios from "axios";
 import Qs from "qs";
 import renderHTML from "react-render-html";
 
+import Result from '../results/result/Result';
+import Review from '../review/Review';
+
 import { reduceParagraph } from '../../helpers';
 import classes from './ProductDetails.css';
-import Result from '../results/result/Result';
 import { Carousel } from "react-responsive-carousel";
 import styles from "react-responsive-carousel/lib/styles/carousel.min.css";
 
@@ -18,14 +20,17 @@ class ProductDetails extends React.Component {
       searchResults: {
         imageEntities: []
       },
+      reviews: {},
       variationsArray: [],
       imgEntities: [],
-      shortDesc: ''
+      shortDesc: '',
+      shortDescToggle: false
     }
   }
 
   componentDidMount(){
    this.callProduct(this.state.itemId);
+   this.callProductReview(this.state.itemId);
   };
 
   componentWillReceiveProps(newProps){
@@ -68,6 +73,35 @@ class ProductDetails extends React.Component {
           }
         }
       );
+    });
+  }
+
+  callProductReview = (itemId) => {
+    axios({
+      url: "https://proxy.hackeryou.com",
+      method: "GET",
+      dataResponse: "json",
+      paramsSerializer: function (params) {
+        return Qs.stringify(params, { arrayFormat: "brackets" });
+      },
+      params: {
+        reqUrl: `http://api.walmartlabs.com/v1/reviews/${
+          itemId
+          }`,
+        params: {
+          apiKey: "y3xen4j3dtzbq4n7snepx8h3"
+        },
+        proxyHeaders: {
+          headers_params: "value"
+        },
+        xmlToJSON: false
+      }
+    }).then(res => {
+
+      this.setState(
+        {
+          reviews: res.data
+        });
     });
   }
 
@@ -135,9 +169,8 @@ class ProductDetails extends React.Component {
     });
   }
 
-  showAll= (event) => {
-    console.log(event.currentTarget);
-    
+  showAll= () => {
+    this.setState({ shortDescToggle: !this.state.shortDescToggle });
   }
 
 
@@ -147,8 +180,8 @@ class ProductDetails extends React.Component {
 
     const shortDescClone = this.state.shortDesc;
 
-    const shortDesc = shortDescClone !== undefined ?
-    reduceParagraph(shortDescClone, 400) : null;
+    const shortDescMin = shortDescClone !== undefined && this.state.shortDescToggle === false ? reduceParagraph(shortDescClone, 400) : null;
+    const shortDescMax = shortDescClone !== undefined && this.state.shortDescToggle === true ? shortDescClone : null;
 
     const name = this.state.searchResults.name;
     const largeImg = this.state.searchResults.largeImage;
@@ -220,13 +253,18 @@ class ProductDetails extends React.Component {
             <div className="aboutDetailsContainer">
               <p className="aboutDetailsTitle">About This Item</p>
               <div className="aboutDetails">
-                <div className="shortDesc" onClick={this.showAll}>{shortDesc}</div>
+                <div className="shortDesc" onClick={this.showAll}>
+                  {shortDescMax}
+                  {shortDescMin}
+                </div>
                 <div className="longDesc">{longDesc}</div>
               </div>
             </div>
             <div className='variationArrayContainer'>
               {variationsArray}
             </div>
+
+            <Review data={this.state.reviews} />
           </div>
         </div>
       </React.Fragment>;

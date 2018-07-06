@@ -40,10 +40,9 @@ class App extends Component {
       },
       params: {
         reqUrl:
-          "http://api.walmartlabs.com/v1/search",
+          "http://api.walmartlabs.com/v1/trends",
         params: {
-          apiKey: "y3xen4j3dtzbq4n7snepx8h3",
-          query: 'sale'
+          apiKey: "y3xen4j3dtzbq4n7snepx8h3"
         },
         proxyHeaders: {
           headers_params: "value"
