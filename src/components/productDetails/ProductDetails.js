@@ -19,7 +19,8 @@ class ProductDetails extends React.Component {
         imageEntities: []
       },
       variationsArray: [],
-      imgEntities: []
+      imgEntities: [],
+      shortDesc: ''
     }
   }
 
@@ -54,15 +55,19 @@ class ProductDetails extends React.Component {
       }
     }).then(res => {
 
-      this.setState({
-        searchResults: res.data
-      }, () => {
-        this.getImgEntities(res.data.imageEntities, 5);
-        if (res.data.variants !== undefined) {
-          console.log(res.data.variants);
-          this.multiCall(res.data.variants, 4);
+      this.setState(
+        {
+          searchResults: res.data,
+          shortDesc: res.data.shortDescription
+        },
+        () => {
+          this.getImgEntities(res.data.imageEntities, 5);
+          if (res.data.variants !== undefined) {
+            console.log(res.data.variants);
+            this.multiCall(res.data.variants, 4);
+          }
         }
-      });
+      );
     });
   }
 
@@ -130,13 +135,20 @@ class ProductDetails extends React.Component {
     });
   }
 
+  showAll= (event) => {
+    console.log(event.currentTarget);
+    
+  }
+
 
   render() {
     const decode = require('decode-html');
     const longDesc = this.state.searchResults.longDescription !== undefined ? renderHTML(decode(this.state.searchResults.longDescription)) : null;
 
-    const shortDesc = this.state.searchResults.shortDescription !== undefined ?
-    reduceParagraph(this.state.searchResults.shortDescription, 400) : null;
+    const shortDescClone = this.state.shortDesc;
+
+    const shortDesc = shortDescClone !== undefined ?
+    reduceParagraph(shortDescClone, 400) : null;
 
     const name = this.state.searchResults.name;
     const largeImg = this.state.searchResults.largeImage;
@@ -208,7 +220,7 @@ class ProductDetails extends React.Component {
             <div className="aboutDetailsContainer">
               <p className="aboutDetailsTitle">About This Item</p>
               <div className="aboutDetails">
-                <div className="shortDesc">{shortDesc}</div>
+                <div className="shortDesc" onClick={this.showAll}>{shortDesc}</div>
                 <div className="longDesc">{longDesc}</div>
               </div>
             </div>
