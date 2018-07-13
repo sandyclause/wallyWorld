@@ -10,12 +10,12 @@ import ResultsPage from "./containers/resultsPage/ResultsPage";
 import Home from './components/homePage/Home';
 import history from './history';
 
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { Router, Route, Switch } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faSearch, faStar } from "@fortawesome/free-solid-svg-icons";
 
-library.add(faSearch);
+library.add(faSearch, faStar);
 
 
 class App extends Component {

@@ -34,7 +34,6 @@ class ProductDetails extends React.Component {
   };
 
   componentWillReceiveProps(newProps){
-    console.log(newProps.match.params.itemId);
     this.callProduct(newProps.match.params.itemId);
   }
 
@@ -264,7 +263,7 @@ class ProductDetails extends React.Component {
               {variationsArray}
             </div>
 
-            <Review data={this.state.reviews} />
+          <Review data={this.state.reviews} reviewStats={this.state.reviews.reviewStatistics} />
           </div>
         </div>
       </React.Fragment>;

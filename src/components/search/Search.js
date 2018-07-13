@@ -1,7 +1,8 @@
 import React from 'react';
 import classes from './Search.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { withRouter } from 'react-router-dom';
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class Search extends React.Component{
   constructor(){
