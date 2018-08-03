@@ -37,11 +37,11 @@ class ReviewGraph extends React.Component {
         <div className="starsContainer">
           {this.state.countArrayState.map((item, index) => {
           return <div className="starContainer" key={index}>
-
               <p>{item[1]} stars</p>
               <div className="star">
                 <div className="innerStar" style={{ width: (item[0] / this.props.data.totalReviewCount) * 100 + "%" }} />
               </div>
+              <p className='totalStars'>{item[0]}</p>
             </div>;
           })}
         </div>

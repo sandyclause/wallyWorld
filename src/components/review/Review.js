@@ -7,6 +7,19 @@ class Review extends React.Component {
   constructor() {
     super();
 
+    this.state = {
+      reviewStatus: false
+    }
+  }
+
+  componentDidUpdate (prevProps) {
+    if (this.props.data !== prevProps.data) {
+      if (this.props.reviewStats.totalReviewCount !== 'null') {
+        this.setState({
+          reviewStatus: true
+        })
+      }
+    }
   }
 
   render(){
@@ -21,10 +34,9 @@ class Review extends React.Component {
         </div>
       )
     }) : null;
+
+    const reviewGraph = this.state.reviewStatus ? <ReviewGraph data={this.props.data.reviewStatistics} /> : <p>This no currently no reviews for this product</p>;
     
-    console.log(this.props.reviewStats)
-    const reviewGraph = this.props.reviewStats ? <ReviewGraph data={this.props.data.reviewStatistics} /> : null;
-    // <ReviewGraph data={this.props.data.reviewStatistics} />
     return (
       <React.Fragment>
         <h1>Customer Reviews</h1>
